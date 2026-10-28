@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>QC 규제동향 포털</title>
+<meta name="description" content="FDA·EMA·ICH·PIC/S·EDQM·식약처 의약품 품질 가이드라인 바로가기">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: lab-notebook console — agency "sample label" link panels on top, shared tracker table below */
+:root{
+  --bg:#f3f5f4; --surface:#ffffff; --ink:#15211f; --muted:#5b6a67; --line:#d5dddb;
+  --accent:#0b6b5c; --accent-ink:#ffffff; --accent-soft:#e1efeb;
+  --hi:#b42318; --hi-soft:#fde8e6; --mid:#a15c07; --mid-soft:#fdf0dc; --lo:#3d6b2f; --lo-soft:#e6f1e1;
+  --f-display:"IBM Plex Sans KR","Apple SD Gothic Neo","Malgun Gothic",sans-serif;
+  --f-body:"IBM Plex Sans KR","Apple SD Gothic Neo","Malgun Gothic",sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,"SFMono-Regular",Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0f1716; --surface:#16211f; --ink:#e3ece9; --muted:#97a8a4; --line:#2a3a37;
+  --accent:#4fbfa8; --accent-ink:#0b1513; --accent-soft:#1b332e;
+  --hi:#ff8a7a; --hi-soft:#3a1c18; --mid:#f2b45a; --mid-soft:#3a2a12; --lo:#9ccf86; --lo-soft:#1e3019; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0f1716; --surface:#16211f; --ink:#e3ece9; --muted:#97a8a4; --line:#2a3a37;
+  --accent:#4fbfa8; --accent-ink:#0b1513; --accent-soft:#1b332e;
+  --hi:#ff8a7a; --hi-soft:#3a1c18; --mid:#f2b45a; --mid-soft:#3a2a12; --lo:#9ccf86; --lo-soft:#1e3019; color-scheme:dark}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:15px;line-height:1.6}
+.wrap{max-width:1180px;margin:0 auto;padding-block:28px 64px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));display:flex;flex-direction:column;gap:36px}
+header{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:12px;border-bottom:2px solid var(--ink);padding-bottom:14px}
+h1{font-family:var(--f-display);font-size:1.9rem;font-weight:700;margin:0;letter-spacing:-.01em;text-wrap:balance}
+.sub{color:var(--muted);margin:4px 0 0;font-size:.92rem}
+.stamp{font-family:var(--f-mono);font-size:.78rem;color:var(--muted);text-align:right}
+h2{font-family:var(--f-display);font-size:1.15rem;font-weight:600;margin:0;display:flex;align-items:baseline;gap:10px}
+h2 small{font-family:var(--f-mono);font-size:.75rem;color:var(--muted);font-weight:400;letter-spacing:.04em}
+section{display:flex;flex-direction:column;gap:14px;min-width:0}
+
+/* agency panels */
+.agencies{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px}
+.ag{background:var(--surface);border:1px solid var(--line);border-radius:6px;display:flex;flex-direction:column;min-width:0}
+.ag-head{display:flex;align-items:center;gap:10px;padding:12px 14px;border-bottom:1px dashed var(--line)}
+.code{font-family:var(--f-mono);font-weight:500;font-size:.78rem;letter-spacing:.06em;background:var(--ink);color:var(--surface);padding:2px 7px;border-radius:3px}
+.ag-name{font-weight:600;font-size:.95rem}
+.ag ul{list-style:none;margin:0;padding:6px 0}
+.ag li a{display:flex;justify-content:space-between;gap:8px;padding:7px 14px;color:var(--ink);text-decoration:none;font-size:.9rem}
+.ag li a:hover,.ag li a:focus-visible{background:var(--accent-soft);color:var(--accent);outline:none}
+.ag li a span:last-child{color:var(--muted);font-family:var(--f-mono);font-size:.75rem;white-space:nowrap}
+.ag .tip{margin:0;padding:8px 14px 12px;font-size:.8rem;color:var(--muted);border-top:1px solid var(--line)}
+.ag .tip code{font-family:var(--f-mono);font-size:.76rem;background:var(--bg);padding:1px 5px;border-radius:3px;color:var(--ink)}
+
+/* tracker */
+.bar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between}
+.filters{display:flex;flex-wrap:wrap;gap:8px}
+select,input,textarea{font:inherit;font-size:.88rem;color:var(--ink);background:var(--surface);border:1px solid var(--line);border-radius:4px;padding:6px 8px}
+select:focus-visible,input:focus-visible,textarea:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+button{font:inherit;font-size:.88rem;cursor:pointer;border-radius:4px;padding:7px 14px;border:1px solid var(--line);background:var(--surface);color:var(--ink)}
+button.primary{background:var(--accent);color:var(--accent-ink);border-color:var(--accent);font-weight:600}
+button.ghost{background:transparent;border-color:transparent;color:var(--muted);padding:4px 8px}
+button.ghost:hover{color:var(--hi)}
+.counts{display:flex;flex-wrap:wrap;gap:8px;font-size:.82rem}
+.count{display:flex;gap:6px;align-items:baseline;padding:4px 10px;border:1px solid var(--line);border-radius:999px;background:var(--surface)}
+.count b{font-family:var(--f-mono);font-variant-numeric:tabular-nums}
+form#add{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:16px;display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px}
+form#add label{display:flex;flex-direction:column;gap:4px;font-size:.78rem;color:var(--muted);min-width:0}
+form#add .wide{grid-column:1/-1}
+form#add .actions{grid-column:1/-1;display:flex;gap:8px;justify-content:flex-end}
+.tablebox{overflow-x:auto;background:var(--surface);border:1px solid var(--line);border-radius:6px}
+table{width:100%;border-collapse:collapse;font-size:.88rem;min-width:860px}
+th{text-align:left;font-weight:500;font-size:.75rem;letter-spacing:.04em;color:var(--muted);padding:10px 12px;border-bottom:1px solid var(--line);white-space:nowrap}
+td{padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+tr:last-child td{border-bottom:0}
+td.date{font-family:var(--f-mono);font-variant-numeric:tabular-nums;white-space:nowrap;font-size:.82rem}
+td.title a{color:var(--ink);font-weight:500;text-decoration:underline;text-decoration-color:var(--line);text-underline-offset:3px}
+td.title a:hover{text-decoration-color:var(--accent)}
+td.title .memo{color:var(--muted);font-size:.8rem;margin-top:3px}
+.kind{font-family:var(--f-mono);font-size:.72rem;color:var(--muted)}
+.pill{display:inline-block;font-size:.76rem;font-weight:600;padding:2px 9px;border-radius:999px;white-space:nowrap}
+.p-높음{background:var(--hi-soft);color:var(--hi)} .p-중간{background:var(--mid-soft);color:var(--mid)} .p-낮음{background:var(--lo-soft);color:var(--lo)}
+tr.r-높음 td:first-child{box-shadow:inset 3px 0 0 var(--hi)}
+td select{padding:3px 6px;font-size:.8rem}
+.empty{padding:28px;text-align:center;color:var(--muted)}
+.note{font-size:.82rem;color:var(--muted);margin:0}
+.notice{font-size:.85rem;padding:10px 14px;border-radius:4px;background:var(--mid-soft);color:var(--mid)}
+.confirm{display:inline-flex;gap:4px;align-items:center;font-size:.78rem;white-space:nowrap}
+.confirm button{padding:2px 8px;font-size:.78rem}
+@media (max-width:600px){h1{font-size:1.5rem}.stamp{text-align:left}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+<style>body{margin:0} footer{font-size:.8rem;color:var(--muted);border-top:1px solid var(--line);padding-top:12px}</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div>
+      <h1>QC 규제동향 포털</h1>
+      <p class="sub">FDA · EMA · ICH · PIC/S · EDQM · 식약처 의약품 품질 가이드라인 바로가기</p>
+    </div>
+    <div class="stamp">원료의약품 QC 시험실용<br>링크는 새 탭에서 열립니다</div>
+  </header>
+  <section aria-labelledby="links-h">
+    <h2 id="links-h">기관별 바로가기 <small>QUICK LINKS</small></h2>
+    <div class="agencies" id="agencies"></div>
+  </section>
+  <section aria-labelledby="how-h">
+    <h2 id="how-h">확인 순서 <small>ROUTINE</small></h2>
+    <p class="note">① ICH 의견수렴 초안 → ② FDA·EMA 신규 가이드라인 → ③ EU GMP·PIC/S 개정 → ④ 식약처 행정예고·고시 → ⑤ FDA Warning Letter(Data Integrity·시험실 지적) 순으로 월 1회 확인하고, 영향이 있는 문서는 부서 트래커에 등록합니다.</p>
+  </section>
+  <footer>각 기관 공식 사이트로 연결되는 링크 모음입니다. 사이트 구조 변경으로 링크가 바뀔 수 있습니다.</footer>
+</div>
+<script>
+const AGENCIES=[
+ {code:"FDA",name:"미국 FDA",links:[
+  ["가이드라인 검색 (Drugs·CGMP·CMC 필터)","https://www.fda.gov/regulatory-information/search-fda-guidance-documents","fda.gov"],
+  ["CDER 의약품 가이드라인","https://www.fda.gov/drugs/guidances-drugs","fda.gov"],
+  ["Warning Letters 검색","https://www.fda.gov/inspections-compliance-enforcement-and-criminal-investigations/compliance-actions-and-activities/warning-letters","fda.gov"],
+  ["이메일·RSS 알림 구독","https://www.fda.gov/about-fda/contact-fda/stay-informed","fda.gov"],
+  ["Federal Register (FDA 공고)","https://www.federalregister.gov/agencies/food-and-drug-administration","federalregister.gov"]],
+  tip:'Warning Letter 검색어: <code>data integrity</code> <code>laboratory</code> <code>OOS</code>'},
+ {code:"EMA",name:"유럽 EMA",links:[
+  ["과학 가이드라인 (Quality 포함)","https://www.ema.europa.eu/en/human-regulatory-overview/research-development/scientific-guidelines","ema.europa.eu"],
+  ["EMA 뉴스","https://www.ema.europa.eu/en/news","ema.europa.eu"]],
+  tip:'Quality 메뉴에서 안정성·밸리데이션·불순물 문서를 확인'},
+ {code:"EC",name:"EU GMP (EudraLex)",links:[
+  ["EudraLex Volume 4 (EU GMP)","https://health.ec.europa.eu/medicinal-products/eudralex/eudralex-volume-4_en","europa.eu"]],
+  tip:'API는 <code>Part II</code>, 컴퓨터화 시스템은 <code>Annex 11</code>'},
+ {code:"ICH",name:"ICH",links:[
+  ["Quality 가이드라인 (Q1~Q14)","https://www.ich.org/page/quality-guidelines","ich.org"],
+  ["의견수렴 중인 초안 (Step 2)","https://www.ich.org/page/public-consultations","ich.org"]],
+  tip:'FDA·EMA·식약처가 결국 채택하므로 가장 먼저 확인'},
+ {code:"PIC/S",name:"PIC/S",links:[
+  ["GMP 가이드·Data Integrity 문서","https://picscheme.org/en/publications","picscheme.org"]],
+  tip:'실사관 관점의 Data Integrity 가이드 참고'},
+ {code:"EDQM",name:"EDQM (유럽약전)",links:[
+  ["European Pharmacopoeia","https://www.edqm.eu/en/european-pharmacopoeia","edqm.eu"]],
+  tip:'Ph. Eur. 개정 시행일과 CEP 관련 공지'},
+ {code:"MFDS",name:"식약처",links:[
+  ["식약처 누리집","https://www.mfds.go.kr","mfds.go.kr"],
+  ["입법/행정예고","https://www.mfds.go.kr/brd/m_209/list.do","mfds.go.kr"],
+  ["의약품안전나라","https://nedrug.mfds.go.kr","nedrug.mfds.go.kr"],
+  ["국가법령정보센터 (고시 원문·부칙)","https://www.law.go.kr","law.go.kr"]],
+  tip:'대한민국약전 개정은 고시 원문 <code>부칙</code>에서 시행일 확인'}
+];
+document.getElementById("agencies").innerHTML=AGENCIES.map(a=>`<div class="ag"><div class="ag-head"><span class="code">${a.code}</span><span class="ag-name">${a.name}</span></div><ul>${a.links.map(([t,u,d])=>`<li><a href="${u}" target="_blank" rel="noopener"><span>${t}</span><span>${d} ↗</span></a></li>`).join("")}</ul><p class="tip">${a.tip}</p></div>`).join("");
+</script>
+</body>
+</html>
